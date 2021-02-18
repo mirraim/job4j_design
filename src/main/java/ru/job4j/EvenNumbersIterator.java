@@ -21,6 +21,7 @@ public class EvenNumbersIterator implements Iterator<Integer> {
             if (isEven(numbers[i])) {
                 return true;
             }
+            count++;
         }
         return false;
     }
@@ -29,9 +30,6 @@ public class EvenNumbersIterator implements Iterator<Integer> {
     public Integer next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
-        }
-        while (!isEven(numbers[count])) {
-            count++;
         }
         return numbers[count++];
     }
