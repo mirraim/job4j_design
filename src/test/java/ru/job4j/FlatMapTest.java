@@ -63,7 +63,7 @@ public class FlatMapTest {
         flat.next();
     }
 
-    /* @Test
+    @Test
     public void whenSeveralEmptyAndNotEmpty() {
         Iterator<Iterator<?>> it = List.of(
                 Collections.emptyIterator(),
@@ -71,8 +71,8 @@ public class FlatMapTest {
                 Collections.emptyIterator(),
                 List.of(1).iterator()
         ).iterator();
-        FlatMap<?> flat = new FlatMap<>(it);
+        FlatMap<?> flat = new FlatMap(it);
         assertTrue(flat.hasNext());
         assertThat(flat.next(), is(1));
-    }*/
+    }
 }
