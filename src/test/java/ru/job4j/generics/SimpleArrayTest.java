@@ -2,6 +2,8 @@ package ru.job4j.generics;
 
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -82,5 +84,45 @@ public class SimpleArrayTest {
         simpleArray.add(2);
         simpleArray.add(3);
         simpleArray.set(4, 6);
+    }
+
+    @Test
+    public void whenItHasNext() {
+        SimpleArray<Integer> simpleArray = new SimpleArray<>(5);
+        simpleArray.add(2);
+        simpleArray.add(3);
+        Iterator<Integer> it = simpleArray.iterator();
+        assertTrue(it.hasNext());
+    }
+
+    @Test
+    public void whenItHasNextIsFalse() {
+        SimpleArray<Integer> simpleArray = new SimpleArray<>(5);
+        simpleArray.add(2);
+        simpleArray.add(3);
+        Iterator<Integer> it = simpleArray.iterator();
+        it.next();
+        it.next();
+        assertFalse(it.hasNext());
+    }
+
+    @Test
+    public void whenItReturnNext() {
+        SimpleArray<String> simpleArray = new SimpleArray<>(5);
+        simpleArray.add("2");
+        simpleArray.add("3");
+        Iterator<String> it = simpleArray.iterator();
+        assertThat(it.next(), is("2"));
+    }
+
+    @Test
+    public void whenItReturnNextWhenValueIsNull() {
+        SimpleArray<String> simpleArray = new SimpleArray<>(5);
+        simpleArray.add("2");
+        simpleArray.add(null);
+        simpleArray.add("3");
+        Iterator<String> it = simpleArray.iterator();
+        it.next();
+        assertNull(it.next());
     }
 }
