@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class SimpleArrayTest {
 
     @Test
-    public void testRemove() {
+    public void whenRemoveLastIsNull() {
         SimpleArray<Integer> simpleArray = new SimpleArray<>(5);
         simpleArray.add(2);
         simpleArray.add(3);
@@ -19,6 +19,18 @@ public class SimpleArrayTest {
         simpleArray.add(5);
         simpleArray.remove(2);
         assertNull(simpleArray.get(4));
+    }
+
+    @Test
+    public void whenRemove() {
+        SimpleArray<Integer> simpleArray = new SimpleArray<>(5);
+        simpleArray.add(2);
+        simpleArray.add(3);
+        simpleArray.add(2);
+        simpleArray.add(3);
+        simpleArray.add(5);
+        simpleArray.remove(2);
+        assertThat(simpleArray.get(3), is(5));
     }
 
     @Test
