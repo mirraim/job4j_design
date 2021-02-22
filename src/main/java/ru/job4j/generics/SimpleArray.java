@@ -19,19 +19,19 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void set(int index, T model) {
-        Objects.checkIndex(index, size - 1);
+        Objects.checkIndex(index, size);
             arr[index] = model;
     }
 
     public void remove(int index) {
-        Objects.checkIndex(index, arr.length);
+        Objects.checkIndex(index, size);
             System.arraycopy(arr, index + 1, arr, index, arr.length - 1 - index);
             arr[arr.length - 1] = null;
             size--;
     }
 
     public T get(int index) {
-        Objects.checkIndex(index, arr.length);
+        Objects.checkIndex(index, size);
             return arr[index];
     }
 

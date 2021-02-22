@@ -9,8 +9,8 @@ import static org.junit.Assert.*;
 
 public class SimpleArrayTest {
 
-    @Test
-    public void whenRemoveLastIsNull() {
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void whenRemoveLastIsOutOfBounds() {
         SimpleArray<Integer> simpleArray = new SimpleArray<>(5);
         simpleArray.add(2);
         simpleArray.add(3);
@@ -18,7 +18,7 @@ public class SimpleArrayTest {
         simpleArray.add(3);
         simpleArray.add(5);
         simpleArray.remove(2);
-        assertNull(simpleArray.get(4));
+        simpleArray.get(4);
     }
 
     @Test
@@ -48,6 +48,14 @@ public class SimpleArrayTest {
         simpleArray.add(3);
         simpleArray.set(0, 5);
         assertThat(simpleArray.get(0), is(5));
+    }
+
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void whenIndexOutOfBounds() {
+        SimpleArray<Integer> simpleArray = new SimpleArray<>(5);
+        simpleArray.add(2);
+        simpleArray.add(3);
+        simpleArray.set(3, 5);
     }
 
     @Test
