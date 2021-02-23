@@ -37,7 +37,7 @@ public class LinkedArray<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            private Node<E> current;
+            private Node<E> current = first;
             private int expectedModCount = modCount;
 
             @Override
@@ -45,15 +45,7 @@ public class LinkedArray<E> implements Iterable<E> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                if (current == null) {
-                    if (first != null) {
-                        current = first;
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-                return current.next != null;
+                return current != null;
             }
 
             @Override
@@ -61,10 +53,9 @@ public class LinkedArray<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                if (!current.equals(first)) {
-                    current = current.next;
-                }
-                return current.item;
+                E rsl = current.item;
+                current = current.next;
+                return rsl;
             }
         };
     }
