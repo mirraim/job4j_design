@@ -4,21 +4,27 @@ import java.util.Iterator;
 import java.util.Objects;
 
 public class SimpleSet<E> implements Iterable<E> {
-    private SimpleArray<E> array;
+    private final SimpleArray<E> array;
 
     public SimpleSet() {
-        this.array = new SimpleArray<E>();
+        this.array = new SimpleArray<>();
     }
 
     public boolean add(E e) {
-        Iterator<E> it = array.iterator();
-        while (it.hasNext()) {
-            if (Objects.equals(it.next(), e)) {
-                return false;
+        if (!contains(e)) {
+            array.add(e);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean contains(E e) {
+        for (E value : array) {
+            if (Objects.equals(value, e)) {
+                return true;
             }
         }
-        array.add(e);
-        return true;
+        return false;
     }
 
 
