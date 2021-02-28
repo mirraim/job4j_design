@@ -62,6 +62,6 @@ public class User {
         return "User{"
                 + "name='" + name + '\''
                 + ", children=" + children
-                + ", birthday=" + birthday + '}';
+                + ", birthday=" + birthday.toInstant() + '}';
     }
 }
