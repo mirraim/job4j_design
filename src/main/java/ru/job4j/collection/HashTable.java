@@ -35,7 +35,10 @@ public class HashTable<K, V> implements Iterable<K> {
     public V get(K key) {
         int index = hash(key);
         Bucket<K, V> temp = container[index];
-        return Objects.equals(temp.key, key) ? temp.value : null;
+        if (temp != null) {
+            return Objects.equals(temp.key, key) ? temp.value : null;
+        }
+        return null;
     }
 
     public boolean delete(K key) {
