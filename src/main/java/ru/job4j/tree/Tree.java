@@ -16,7 +16,7 @@ public class Tree<E> implements SimpleTree<E> {
     public boolean add(E parent, E child) {
         boolean rsl = false;
         Node<E> parentNode = findBy(parent).orElse(null);
-        if (!contains(parentNode, child)) {
+        if (canAdd(parentNode, child)) {
             parentNode.children.add(new Node<>(child));
             rsl = true;
         }
@@ -32,16 +32,8 @@ public class Tree<E> implements SimpleTree<E> {
         return findByPredicate(el -> el.value.equals(value));
     }
 
-    private boolean contains(Node<E> parent, E child) {
-        if (parent == null) {
-            return false;
-        }
-        for (Node<E> node : parent.children) {
-            if (node.value.equals(child)) {
-                return true;
-            }
-        }
-        return false;
+    private boolean canAdd(Node<E> parent, E child) {
+        return parent != null && findBy(child).isEmpty();
     }
 
     private Optional<Node<E>> findByPredicate(Predicate<Node<E>> condition) {
