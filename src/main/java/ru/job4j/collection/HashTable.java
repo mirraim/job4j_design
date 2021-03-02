@@ -21,35 +21,36 @@ public class HashTable<K, V> implements Iterable<K> {
             container = grow();
         }
         int index = hash(key);
+        if (contains(index) && !container[index].key.equals(key)) {
+            return false;
+        }
         if (!contains(index)) {
-            container[index] = new Bucket<>(key, value);
             size++;
-            modCount++;
-            return true;
-            }
-        return false;
+        }
+        change(new Bucket<>(key, value), index);
+
+        return true;
     }
 
     public V get(K key) {
         int index = hash(key);
-        return container[index].value;
+        Bucket<K, V> temp = container[index];
+        return Objects.equals(temp.key, key) ? temp.value : null;
     }
 
     public boolean delete(K key) {
         int index = hash(key);
-        if (contains(index)) {
-            container[index] = null;
+        if (contains(index) && container[index].key.equals(key)) {
+            change(null, index);
             size--;
-            modCount++;
-            return true;
         }
         return false;
     }
 
     @Override
     public Iterator<K> iterator() {
-        return new Iterator<K>() {
-            private int expectedModCount = modCount;
+        return new Iterator<>() {
+            private final int expectedModCount = modCount;
             private int count = 0;
 
             @Override
@@ -99,6 +100,11 @@ public class HashTable<K, V> implements Iterable<K> {
             }
         }
         return newContainer;
+    }
+
+    private void change(Bucket<K, V> bucket, int index) {
+        container[index] = bucket;
+        modCount++;
     }
 
     private static class Bucket<K, V> {

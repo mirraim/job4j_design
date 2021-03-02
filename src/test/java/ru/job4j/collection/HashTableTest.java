@@ -2,9 +2,7 @@ package ru.job4j.collection;
 
 import org.junit.Test;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -35,7 +33,15 @@ public class HashTableTest {
     public void whenInsertEquals() {
         HashTable<Integer, String> table = new HashTable<>();
         table.insert(23, "first");
-        assertFalse(table.insert(23, "second"));
+        table.insert(23, "second");
+        assertEquals(table.get(23), "second");
+    }
+    @Test
+    public void whenInsertDifferentButSameHash() {
+        HashTable<User, String> table = new HashTable<>();
+        table.insert(new User("anna", 2), "first");
+        assertFalse(table.insert(new User("anna", 0), "second"));
+
     }
 
     @Test
@@ -68,6 +74,14 @@ public class HashTableTest {
 
     @Test
     public void whenDelete() {
+        HashTable<User, String> table = new HashTable<>();
+        table.insert(new User("anna", 2), "first");
+        table.insert(new User("tom", 0), "second");
+        assertFalse(table.delete(new User("anna", 0)));
+    }
+
+    @Test
+    public void whenDeleteNotEquals() {
         HashTable<Integer, String> table = new HashTable<>();
         table.insert(23, "first");
         table.insert(56, "second");

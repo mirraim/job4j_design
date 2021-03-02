@@ -8,10 +8,10 @@ public class User {
     private int children;
     private Calendar birthday;
 
-    public User(String name, int children, Calendar birthday) {
+    public User(String name, int children) {
         this.name = name;
         this.children = children;
-        this.birthday = birthday;
+        //this.birthday = birthday;
     }
 
     public String getName() {
@@ -48,13 +48,13 @@ public class User {
         }
         User user = (User) o;
         return children == user.children
-                && Objects.equals(name, user.name)
-                && Objects.equals(birthday, user.birthday);
+                && Objects.equals(name, user.name);
+                //&& Objects.equals(birthday, user.birthday);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, children, birthday);
+        return Objects.hash(name);
     }
 
     @Override
