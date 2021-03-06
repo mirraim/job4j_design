@@ -1,9 +1,7 @@
 package ru.job4j.collection;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Analize {
@@ -11,11 +9,9 @@ public class Analize {
         Map<Integer, String> curr = current.stream()
                 .collect(Collectors.toMap(User::getId, User::getName));
         Info info = new Info();
-        Set<Integer> ids = new HashSet<>();
-        for (int i = 0; i < previous.size(); i++) {
-            Integer id = previous.get(i).getId();
-            if (curr.containsKey(id)) {
-               if (!curr.get(id).equals(previous.get(i).getName())) {
+        for (User user : previous) {
+            if (curr.containsKey(user.getId())) {
+               if (!curr.get(user.getId()).equals(user.getName())) {
                    info.changed++;
                }
             } else {
