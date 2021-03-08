@@ -19,7 +19,7 @@ public class EvenNumberFile {
         }
     }
 
-    public static String isEven (String number) {
+    public static String isEven(String number) {
         int value = Integer.parseInt(number);
         if (value % 2 == 0) {
             return "Это число - четное";
