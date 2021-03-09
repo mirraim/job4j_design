@@ -26,7 +26,7 @@ public class LogFilter {
         try (PrintWriter out = new PrintWriter(
                 new BufferedOutputStream(
                         new FileOutputStream(file)))) {
-            log.forEach(s -> out.printf("%s%n", s));
+            log.forEach(out::println);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
