@@ -18,14 +18,12 @@ public class ConsoleChat {
     }
 
     public void run() {
+        boolean isStopped = false;
+        List<String> answers = answer();
+        Random random = new Random();
+        List<String> log = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(
-                                    new InputStreamReader(System.in));
-             BufferedWriter bw = new BufferedWriter(
-                     new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
-            boolean isStopped = false;
-            List<String> answers = answer();
-            Random random = new Random();
-            List<String> log = new ArrayList<>();
+                                    new InputStreamReader(System.in))) {
             String line = in.readLine();
             log.add(line);
             while (!line.equals(OUT)) {
@@ -43,13 +41,10 @@ public class ConsoleChat {
                 line = in.readLine();
                 log.add(line);
             }
-            for (String mess: log) {
-                bw.write(mess);
-                bw.newLine();
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        writeLog(log);
     }
 
     public static void main(String[] args) {
@@ -69,5 +64,17 @@ public class ConsoleChat {
             throw new IllegalArgumentException("Список ответов пуст");
         }
         return answersList;
+    }
+
+    private void writeLog(List<String> lines) {
+        try (BufferedWriter bw = new BufferedWriter(
+                new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
+            for (String mess: lines) {
+                bw.write(mess);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
