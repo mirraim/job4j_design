@@ -1,0 +1,8 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<unit name = "Warrior" hitpoints="200" isActive ="false">
+    <Weapon name="Sword" damage="20"/>
+    <skills>
+        <skill>Attack</skill>
+        <skill>Protection</skill>
+    </skills>
+</unit>
