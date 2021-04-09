@@ -19,6 +19,14 @@ public class Weapon {
     public Weapon() {
     }
 
+    public int getDamage() {
+        return damage;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return "Weapon{"
