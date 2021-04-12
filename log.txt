@@ -1,10 +1,29 @@
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:18 +0300] "GET /items/ajax.html HTTP/1.1" 404 1113
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:23 +0300] "GET /TrackStudio HTTP/1.1" 302 -
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:23 +0300] "GET /TrackStudio/ HTTP/1.1" 404 1110
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:34 +0300] "GET /TrackStudioNew/ HTTP/1.1" 404 -
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:48 +0300] "GET / HTTP/1.1" 200 11488
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /tomcat.png HTTP/1.1" 200 5103
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /tomcat.css HTTP/1.1" 200 5931
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-nav.png HTTP/1.1" 200 1401
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-button.png HTTP/1.1" 200 713
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-middle.png HTTP/1.1" 200 1918
+/home/mirraim/projects/job4j_design/input.txt
+/home/mirraim/projects/job4j_design/log.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.EvenIteratorTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.TriggerTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.BackwardArrayItTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.io.ConfigTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.iterator.FlatMapTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.generics.SimpleArrayTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.collection.SimpleSetTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.collection.SimpleStackTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.AppTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.collection.SimpleQueueTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.MatrixItTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.iterator.EvenIteratorTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.tree.TreeTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.collection.AnalizeTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.collection.SimpleArrayTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.io.ArgsNameTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.FlatMapTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.collection.LinkedArrayTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.iterator.MatrixItTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.iterator.ListUtilsTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.io.AnalizyTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.collection.HashTableTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.collection.ForwardLinkedTest.txt
+/home/mirraim/projects/job4j_design/target/surefire-reports/ru.job4j.iterator.BackwardArrayItTest.txt
+/home/mirraim/projects/job4j_design/result.txt
+/home/mirraim/projects/job4j_design/even.txt
+/home/mirraim/projects/job4j_design/data/log.txt
