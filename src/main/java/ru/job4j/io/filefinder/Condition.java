@@ -11,7 +11,7 @@ public class Condition {
             return findName(fileInfo);
         }
         if (searchType.equals("mask")) {
-            return findMask(fileInfo);
+            return findRegex(preparePattern(fileInfo));
         }
         if (searchType.equals("regex")) {
             return findRegex(fileInfo);
@@ -24,28 +24,26 @@ public class Condition {
         return path -> path.toFile().getName().equals(fileInfo);
     }
 
-    private Predicate<Path> findMask(String fileInfo) {
-        int index = fileInfo.indexOf("*");
-        if (index == -1 || index != fileInfo.lastIndexOf("*")) {
-            throw new IllegalArgumentException("Invalid mask");
-        }
-        String start = fileInfo.substring(0, index);
-        String end = fileInfo.substring(index + 1);
-        if (index == 0) {
-            return path -> path.toFile().getName().endsWith(end);
-        }
-        if (index == fileInfo.length() - 1) {
-            return path -> path.toFile().getName().startsWith(start);
-        }
-        return path -> path.toFile().getName().startsWith(start)
-                && path.toFile().getName().endsWith(end);
-    }
-
     private Predicate<Path> findRegex(String fileInfo) {
         return path -> {
             Pattern pattern = Pattern.compile(fileInfo);
             Matcher matcher = pattern.matcher(path.toFile().getName());
             return matcher.find();
         };
+    }
+
+    private String preparePattern(String mask) {
+        StringBuilder rsl = new StringBuilder();
+        for (int i = 0; i < mask.length(); i++) {
+            char symbol = mask.charAt(i);
+            if (symbol == '*') {
+                rsl.append(".*");
+            } else if (symbol == '.') {
+                rsl.append("//.");
+            } else {
+                rsl.append(symbol);
+            }
+        }
+        return rsl.toString();
     }
 }
