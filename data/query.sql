@@ -30,7 +30,7 @@ insert into product (name, type_id, expired_date, price) values
 ('костромской', 1, '01.09.2021', 200),
 ('эдам', 1, '01.11.2021', 250),
 ('бородинский', 2, '25.04.2021', 35),
-('8 злаков', 2, '26.04.2021', 35),
+('8 злаков', 2, '26.04.2020', 35),
 ('свинина', 3, '25.04.2021', 300),
 ('говядина', 3, '05.05.2021', 450),
 ('курица', 3, '02.05.2021', 200),
@@ -55,8 +55,13 @@ WHERE p.name LIKE '%мороженное%';
 -- выводит все продукты, срок годности которых заканчивается в следующем месяце.
 -- Запрос должен быть универсальным, т.е. не зависеть от конкретного временного промежутка
 
-SELECT p.name as Продукт FROM product as p
-WHERE p.expired_date< (current_date + interval '1 month');
+-- месяц, начиная с текущей даты
+SELECT p.name as Продукт, p.expired_date FROM product as p
+WHERE p.expired_date< (current_date + interval '1 month') AND p.expired_date>current_date;
+
+-- месяц, начиная с первого числа следующего месяца
+SELECT p.name as Продукт, p.expired_date FROM product as p
+WHERE date_part('month', (current_date + interval '1 month')) = date_part('month', expired_date);
 
 -- выводит самый дорогой продукт.
 
