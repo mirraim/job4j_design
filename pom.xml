@@ -16,6 +16,7 @@
   </properties>
 
   <dependencies>
+    <!--TEST-->
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest-all</artifactId>
@@ -27,6 +28,7 @@
       <artifactId>junit</artifactId>
       <version>4.12</version>
     </dependency>
+    <!--LOG-->
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
@@ -37,6 +39,12 @@
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.7.30</version>
     </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.30</version>
+    </dependency>
+    <!--Serialisation-->
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
@@ -62,6 +70,13 @@
       <artifactId>json</artifactId>
       <version>20200518</version>
     </dependency>
+    <!--DATA-->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.16</version>
+    </dependency>
+
   </dependencies>
 
   <build>
