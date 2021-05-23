@@ -1,4 +1,4 @@
-package ru.job4j.jc;
+package ru.job4j.gc;
 
 public class GCDemo {
     private static final long KB = 1000;
