@@ -1,20 +1,28 @@
 package ru.job4j.srp.utils.formatter;
 
+import ru.job4j.srp.Employee;
+import ru.job4j.srp.utils.fieldlist.FieldList;
+
 import java.util.List;
 
 public class HTMLFormatter implements ReportFormatter {
     @Override
-    public String format(List<String> args) {
-        StringBuilder builder = new StringBuilder("   <tr>");
-        for (String arg: args) {
-            builder.append(" <td>")
-                    .append(arg)
-                    .append("</td>");
+    public String format(List<Employee> employees, FieldList fieldList) {
+        StringBuilder builder = createHead(fieldList.getHeaderList()).append("   <tr>");
+        for (Employee employee :employees) {
+            List<String> args = fieldList.getList(employee);
+            for (String arg : args) {
+                builder.append(" <td>")
+                        .append(arg)
+                        .append("</td>");
+            }
         }
-        return builder.append("</tr>").append(System.lineSeparator()).toString();
+        return builder.append("</tr>")
+                .append(System.lineSeparator())
+                .append(close())
+                .toString();
     }
 
-    @Override
     public StringBuilder createHead(List<String> args) {
         StringBuilder builder = new StringBuilder("<!DOCTYPE HTML>")
                 .append(System.lineSeparator())
@@ -39,7 +47,6 @@ public class HTMLFormatter implements ReportFormatter {
         return builder.append("</tr>").append(System.lineSeparator());
     }
 
-    @Override
     public String close() {
         StringBuilder builder = new StringBuilder("  </table>").append(System.lineSeparator());
         builder.append(" </body>")

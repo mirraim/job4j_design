@@ -1,8 +1,7 @@
 package ru.job4j.srp;
 
-import ru.job4j.srp.utils.fieldlist.FieldList;
-import ru.job4j.srp.utils.formatter.ReportFormatter;
 import ru.job4j.srp.utils.ReportProperties;
+import ru.job4j.srp.utils.formatter.ReportFormatter;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -19,16 +18,10 @@ public class ReportEngine implements Report {
     @Override
     public String generate(Predicate<Employee> filter) {
         ReportFormatter formatter = properties.getFormatter();
-        FieldList fieldList = properties.getFieldList();
-        StringBuilder text = formatter.createHead(fieldList.getHeaderList());
         List<Employee> employees = store.findBy(filter);
         if (properties.getComparator().isPresent()) {
             employees.sort(properties.getComparator().get());
         }
-        for (Employee employee : employees) {
-            text.append(formatter.format(fieldList.getList(employee)));
-        }
-        text.append(formatter.close());
-        return text.toString();
+        return formatter.format(employees, properties.getFieldList());
     }
 }

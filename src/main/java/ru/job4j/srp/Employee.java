@@ -1,13 +1,22 @@
 package ru.job4j.srp;
 
+import ru.job4j.srp.utils.DateAdapter;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Calendar;
 import java.util.Objects;
 
+@XmlRootElement(name = "employee")
+@XmlType(propOrder = {"name", "hired", "fired"})
 public class Employee {
     private String name;
     private Calendar hired;
     private Calendar fired;
     private double salary;
+
+    public Employee() {
+    }
 
     public Employee(String name, Calendar hired, Calendar fired, double salary) {
         this.name = name;
@@ -16,6 +25,7 @@ public class Employee {
         this.salary = salary;
     }
 
+    @XmlElement
     public String getName() {
         return name;
     }
@@ -24,6 +34,7 @@ public class Employee {
         this.name = name;
     }
 
+    @XmlJavaTypeAdapter(DateAdapter.class)
     public Calendar getHired() {
         return hired;
     }
@@ -32,6 +43,7 @@ public class Employee {
         this.hired = hired;
     }
 
+    @XmlJavaTypeAdapter(DateAdapter.class)
     public Calendar getFired() {
         return fired;
     }
@@ -40,6 +52,7 @@ public class Employee {
         this.fired = fired;
     }
 
+    @XmlAttribute
     public double getSalary() {
         return salary;
     }
