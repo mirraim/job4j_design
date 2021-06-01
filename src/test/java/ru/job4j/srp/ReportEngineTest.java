@@ -14,6 +14,7 @@ public class ReportEngineTest {
     public void whenOldGenerated() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
+        now.set(2021, Calendar.JUNE, 1, 11, 13, 36);
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportEngine(store, new GeneralProperties());
@@ -32,6 +33,7 @@ public class ReportEngineTest {
     public void whenHTMLGenerated() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
+        now.set(2021, Calendar.JUNE, 1, 11, 13, 36);
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportEngine(store, new ITProperties());
@@ -56,6 +58,7 @@ public class ReportEngineTest {
     public void whenHR() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
+        now.set(2021, Calendar.JUNE, 1, 11, 13, 36);
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Employee employee = new Employee("Tom", now, now, 120);
@@ -77,6 +80,7 @@ public class ReportEngineTest {
     public void whenAccGenerated() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
+        now.set(2021, Calendar.JUNE, 1, 11, 13, 36);
         Employee worker = new Employee("Ivan", now, now, 100.235);
         store.add(worker);
         Report engine = new ReportEngine(store, new AccProperties());
@@ -95,6 +99,7 @@ public class ReportEngineTest {
     public void whenXmlGenerated() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
+        now.set(2021, Calendar.JUNE, 1, 11, 13, 36);
         Employee worker = new Employee("Ivan", now, now, 100.235);
         store.add(worker);
         Report engine = new ReportEngine(store, new XmlProperties());
@@ -138,7 +143,6 @@ public class ReportEngineTest {
                 .append("\"hourOfDay\":11,\"minute\":13,\"second\":36},")
                 .append("\"salary\":100.0}")
                 .append(System.lineSeparator());
-        System.out.println(engine.generate(em -> true));
         assertThat(engine.generate(em -> true), is(expect.toString()));
     }
 }
