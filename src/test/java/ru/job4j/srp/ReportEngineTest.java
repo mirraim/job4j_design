@@ -82,7 +82,7 @@ public class ReportEngineTest {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         now.set(2021, Calendar.JUNE, 1, 11, 13, 36);
-        Employee worker = new Employee("Ivan", now, now, 100.232);
+        Employee worker = new Employee("Ivan", now, now, 100.235);
         store.add(worker);
         Report engine = new ReportEngine(store, new AccProperties());
         StringBuilder expect = new StringBuilder()
@@ -91,7 +91,7 @@ public class ReportEngineTest {
                 .append("Ivan").append(";")
                 .append(worker.getHired().getTime()).append(";")
                 .append(worker.getFired().getTime()).append(";")
-                .append("100 руб. 23 коп.").append(";")
+                .append("100 руб. 24 коп.").append(";")
                 .append(System.lineSeparator());
         assertEquals(engine.generate(em -> true), (expect.toString()));
     }
