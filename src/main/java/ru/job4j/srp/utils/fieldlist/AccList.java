@@ -13,13 +13,12 @@ public class AccList implements FieldList {
 
     @Override
     public List<String> getList(Employee employee) {
-        String[] salary = String.format("%.2f", (employee.getSalary())).split(",");
-        String rub = "";
-        String kop = "";
-        if (salary.length == 2) {
-            rub = salary[0];
-            kop = salary[1];
-        }
+        long temp = Math.round(employee.getSalary() * 100);
+        String sal = String.valueOf(temp);
+        int index = sal.length() - 2;
+        String rub = sal.substring(0, index);
+        String kop = sal.substring(index);
+
         return List.of(
                 employee.getName(),
                 employee.getHired().getTime().toString(),
