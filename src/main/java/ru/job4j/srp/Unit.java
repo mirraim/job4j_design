@@ -19,6 +19,10 @@ public class Unit {
         this.equipment = equipment;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String[] getSkills() {
         return skills;
     }
