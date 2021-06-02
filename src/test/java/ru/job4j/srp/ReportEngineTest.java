@@ -108,20 +108,25 @@ public class ReportEngineTest {
         StringBuilder expect = new StringBuilder()
                 .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
                 .append(System.lineSeparator())
-                .append("<employee salary=\"100.235\">")
+                .append("<employees>")
                 .append(System.lineSeparator())
-                .append("    <name>Ivan</name>")
+                .append("    <employee salary=\"100.235\">")
                 .append(System.lineSeparator())
-                .append("    <hired>")
+                .append("        <name>Ivan</name>")
+                .append(System.lineSeparator())
+                .append("        <hired>")
                 .append(formatter.format(worker.getHired().getTime()))
                 .append("</hired>")
                 .append(System.lineSeparator())
-                .append("    <fired>")
+                .append("        <fired>")
                 .append(formatter.format(worker.getFired().getTime()))
                 .append("</fired>")
                 .append(System.lineSeparator())
-                .append("</employee>")
+                .append("    </employee>")
+                .append(System.lineSeparator())
+                .append("</employees>")
                 .append(System.lineSeparator());
+        //System.out.println(engine.generate(em -> true));
         assertThat(engine.generate(em -> true), is(expect.toString()));
     }
 
@@ -134,7 +139,7 @@ public class ReportEngineTest {
         store.add(worker);
         Report engine = new ReportEngine(store, new JsonProperties());
         StringBuilder expect = new StringBuilder()
-                .append("{")
+                .append("{\"employees\":[{")
                 .append("\"name\":\"Ivan\",")
                 .append("\"hired\":{")
                 .append("\"year\":2021,\"month\":5,\"dayOfMonth\":1,")
@@ -142,7 +147,7 @@ public class ReportEngineTest {
                 .append("\"fired\":{")
                 .append("\"year\":2021,\"month\":5,\"dayOfMonth\":1,")
                 .append("\"hourOfDay\":11,\"minute\":13,\"second\":36},")
-                .append("\"salary\":100.0}")
+                .append("\"salary\":100.0}]}")
                 .append(System.lineSeparator());
         assertThat(engine.generate(em -> true), is(expect.toString()));
     }

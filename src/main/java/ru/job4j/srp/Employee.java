@@ -8,11 +8,16 @@ import java.util.Calendar;
 import java.util.Objects;
 
 @XmlRootElement(name = "employee")
-@XmlType(propOrder = {"name", "hired", "fired"})
+//@XmlType(propOrder = {"name", "hired", "fired"})
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Employee {
+    @XmlElement
     private String name;
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Calendar hired;
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Calendar fired;
+    @XmlAttribute
     private double salary;
 
     public Employee() {
@@ -25,7 +30,7 @@ public class Employee {
         this.salary = salary;
     }
 
-    @XmlElement
+
     public String getName() {
         return name;
     }
@@ -34,7 +39,7 @@ public class Employee {
         this.name = name;
     }
 
-    @XmlJavaTypeAdapter(DateAdapter.class)
+
     public Calendar getHired() {
         return hired;
     }
@@ -43,7 +48,7 @@ public class Employee {
         this.hired = hired;
     }
 
-    @XmlJavaTypeAdapter(DateAdapter.class)
+
     public Calendar getFired() {
         return fired;
     }
@@ -52,7 +57,7 @@ public class Employee {
         this.fired = fired;
     }
 
-    @XmlAttribute
+
     public double getSalary() {
         return salary;
     }
