@@ -16,20 +16,19 @@ public class Shop implements Storage {
 
     @Override
     public List<Food> getList() {
-        List<Food> current = foods;
-        foods = new ArrayList<>();
-        return current;
+        return foods;
     }
 
     @Override
-    public void add(Food food, long fresh) {
+    public boolean add(Food food, long fresh) {
         if (fresh >= 25 && fresh < 75) {
             foods.add(food);
+            return true;
         } else if (fresh < 100 && fresh >= 75) {
             food.setDiscount(25);
             foods.add(food);
-        } else {
-            System.out.println("Это магазин, вам не сюда");
+            return true;
         }
+        return false;
     }
 }

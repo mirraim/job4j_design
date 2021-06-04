@@ -16,17 +16,15 @@ public class Warehouse implements Storage {
 
     @Override
     public List<Food> getList() {
-        List<Food> current = foods;
-        foods = new ArrayList<>();
-        return current;
+        return foods;
     }
 
     @Override
-    public void add(Food food, long fresh) {
+    public boolean add(Food food, long fresh) {
         if (fresh < 25) {
             foods.add(food);
-        } else {
-            System.out.println("Продукт недостаточно свежий");
+            return true;
         }
+        return false;
     }
 }

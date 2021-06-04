@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface Storage {
     List<Food> getList();
-    void add(Food food, long fresh);
+    boolean add(Food food, long fresh);
 }

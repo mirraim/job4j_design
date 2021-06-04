@@ -11,9 +11,11 @@ public class Trash implements Storage {
     }
 
     @Override
-    public void add(Food food, long fresh) {
+    public boolean add(Food food, long fresh) {
         if (fresh <= 100) {
             System.out.println("Этот продукт еще можно продать!");
+            return false;
         }
+        return true;
     }
 }
