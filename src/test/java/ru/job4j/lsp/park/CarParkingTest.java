@@ -82,7 +82,7 @@ public class CarParkingTest {
         Truck truck = new Truck(3);
         parking.park(truck);
         parking.park(new Car());
-        assertEquals(parking.getCars().get(LotType.CAR).size(), 2);
+        assertEquals(parking.getCars().get(LotType.CAR).size(), 1);
     }
 
     @Test
@@ -90,8 +90,9 @@ public class CarParkingTest {
         CarParking parking = new CarParking(0, 2);
         parking.park(new Truck(3));
         parking.park(new Car());
-        List<Vehicle> trucks = parking.getCars().get(LotType.TRACK);
-        assertEquals(trucks.size(), 2);
+        List<Vehicle> trucks = parking.getCars().get(LotType.TRUCK);
+        List<Vehicle> cars = parking.getCars().get(LotType.CAR);
+        assertEquals(trucks.size(), 1);
     }
 
     @Test
@@ -107,7 +108,7 @@ public class CarParkingTest {
     public void whenChangeLotType() {
         CarParking parking = new CarParking(3, 0);
         parking.park(new Truck(3));
-        List<Vehicle> trucks = parking.getCars().get(LotType.TRACK);
+        List<Vehicle> trucks = parking.getCars().get(LotType.TRUCK);
         assertEquals(trucks.get(0).getLotType(), LotType.CAR);
     }
 }
