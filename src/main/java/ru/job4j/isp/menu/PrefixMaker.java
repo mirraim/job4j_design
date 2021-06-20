@@ -1,11 +1,12 @@
 package ru.job4j.isp.menu;
 
 public class PrefixMaker {
-    public String getPrefix(int level, String prefix) {
+    public String getPrefix(Node node, String prefix) {
         StringBuilder rsl = new StringBuilder("");
-        if (level != 0) {
-            rsl.append(String.valueOf(prefix).repeat(Math.max(0, level)));
-            rsl.append(" ");
+        Node current = node;
+        while (current.getParent() != null) {
+            rsl.append(prefix);
+            current = current.getParent();
         }
         return rsl.toString();
     }

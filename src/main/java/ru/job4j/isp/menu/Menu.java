@@ -1,62 +1,90 @@
 package ru.job4j.isp.menu;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Menu implements NumberMaker {
+public class Menu {
     private final Map<String, Node> menu;
     private Node lastNode;
 
     public Menu() {
-        this.menu = new LinkedHashMap<>();
+        this.menu = new HashMap<>();
         this.lastNode = null;
     }
 
-    public boolean add(int level) {
-        Node current = createNode(level);
-        if (current == null) {
+    public boolean add(String name) {
+        return menu.put(name, createNode(null, name)) == null;
+    }
+
+    public boolean add(String name, Action action) {
+        Node current = createNode(null, name);
+        current.setAction(action);
+        return menu.put(name, current) == null;
+    }
+
+    public boolean add(String parent, String name) {
+       Node parentNode = menu.get(parent);
+       if (parentNode == null) {
+           throw new IllegalArgumentException();
+       }
+        return menu.put(name, createNode(parentNode, name)) == null;
+    }
+
+    public boolean add(String parent, String name, Action action) {
+        Node parentNode = menu.get(parent);
+        if (parentNode == null) {
             throw new IllegalArgumentException();
         }
-        String number = makeNumber(current.getParentNumber(), current.getNumber());
-        lastNode = current;
-        return menu.put(number, current) == null;
+        Node current = createNode(parentNode, name);
+        current.setAction(action);
+        return menu.put(name, current) == null;
     }
 
-    public void choose(String key) {
+    public boolean choose(String key) {
         Node node = menu.get(key);
-        node.getAction().execute();
+        if (node != null && node.getAction() != null) {
+            node.getAction().execute();
+            return true;
+        }
+        return false;
     }
 
-    public Map<String, Node> getMenu() {
-        return menu;
+    public boolean setAction(String name, Action action) {
+        Node node = menu.get(name);
+        if (node == null) {
+            return false;
+        }
+        node.setAction(action);
+        return true;
     }
 
-    public List<String> print() {
+    public List<String> getMenu() {
         return menu.values().stream()
+                .sorted(new NodeComparator())
                 .map(Node::getName)
                 .collect(Collectors.toList());
     }
 
-    private Node createNode(int level) {
-        if (lastNode == null) {
-            if (level != 0) {
-                throw new IllegalArgumentException();
+    public String print() {
+        StringBuilder rsl = new StringBuilder();
+        menu.values().stream()
+                .sorted(new NodeComparator())
+                .map(Node::getFullName)
+                .forEach(str -> rsl.append(str).append(System.lineSeparator()));
+        return rsl.toString();
+    }
+
+    private Node createNode(Node parent,  String name) {
+        if (parent == null) {
+            if (lastNode == null) {
+                lastNode = Node.create(null, new FirstNodeCreator(), name);
+            } else {
+                lastNode = Node.create(lastNode, new SameNodeCreator(), name);
             }
-            return Node.create(lastNode, new FirstNodeCreator());
+            return lastNode;
         }
-        if (level == lastNode.getLevel()) {
-            return Node.create(lastNode, new SameNodeCreator());
-        }
-        if (level == lastNode.getLevel() + 1) {
-            return Node.create(lastNode, new ChildNodeCreator());
-        }
-        if (level < lastNode.getLevel() && level >= 0) {
-            HighNodeCreator creator = new HighNodeCreator();
-            creator.setLevel(level);
-            return Node.create(lastNode, creator);
-        }
-        throw new IllegalArgumentException();
+        return Node.create(parent, new ChildNodeCreator(), name);
     }
 }

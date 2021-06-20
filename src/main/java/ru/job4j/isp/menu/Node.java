@@ -1,47 +1,54 @@
 package ru.job4j.isp.menu;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Node {
-    private static final String NAME = "Задача ";
-    private static final String PREFIX = "----";
-    private int level;
-    private Node prev;
-    private int number;
-    private String parentNumber;
     private String name;
+    private static final String PREFIX = "  ";
+    private Node parent;
+    private int number;
+    private String fullNumber;
+    private String fullName;
     private Action action;
+    private List<Node> children;
 
-    public Node(int level, Node prev, int number, String parentNumber, String name) {
-        this.level = level;
-        this.prev = prev;
+    public Node(Node prev, int number, String fullNumber, String name, String fullName) {
+        this.parent = prev;
         this.number = number;
-        this.parentNumber = parentNumber;
+        this.fullNumber = fullNumber;
         this.name = name;
+        this.fullName = fullName;
+        this.children = new ArrayList<>();
     }
 
-    public static Node create(Node prev, NodeCreator creator) {
-        return creator.create(prev, NAME, PREFIX);
+    public static Node create(Node prev, NodeCreator creator, String name) {
+        return creator.create(prev, name, PREFIX);
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public Node getPrev() {
-        return prev;
+    public Node getParent() {
+        return parent;
     }
 
     public int getNumber() {
         return number;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public String getParentNumber() {
-        return parentNumber;
+    public String getFullNumber() {
+        return fullNumber;
+    }
+
+    public List<Node> getChildren() {
+        return children;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Action getAction() {
@@ -55,9 +62,13 @@ public class Node {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Node{");
-        sb.append("name='").append(name).append('\'');
+        sb.append("name='").append(fullName).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    public void add(Node node) {
+        children.add(node);
     }
 
     @Override
@@ -69,11 +80,11 @@ public class Node {
             return false;
         }
         Node node = (Node) o;
-        return Objects.equals(name, node.name);
+        return Objects.equals(fullName, node.fullName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(fullName);
     }
 }
